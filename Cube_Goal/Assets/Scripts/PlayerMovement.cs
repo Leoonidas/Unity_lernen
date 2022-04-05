@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public Rigidbody rb;
-    public float speed = 0.02f;
+    public float speed = 0.05f;
 
 
     // Start is called before the first frame update
@@ -26,7 +26,17 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(rb.position + speed * (new Vector3(x, y, z)));
 
-       
-
     }
+
+    private void OnCollisionEnter(Collision collider)
+    {
+        Debug.Log("Player collision with " + collider.transform.name);
+
+        if (collider.transform.tag == "Goal")
+        {
+            Destroy(collider.gameObject);
+        }
+    }
+
+
 }

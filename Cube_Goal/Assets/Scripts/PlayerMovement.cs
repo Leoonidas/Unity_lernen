@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public Rigidbody rb;
-    public float speed = 0.05f;
+    public float speed = 3.0f;
 
 
     // Start is called before the first frame update
@@ -24,18 +24,30 @@ public class PlayerMovement : MonoBehaviour
         float y = Input.GetAxis("Jump");
         float z = Input.GetAxis("Vertical");
 
-        rb.MovePosition(rb.position + speed * (new Vector3(x, y, z)));
+        rb.MovePosition(rb.position + speed * (new Vector3(x, y, z)) * Time.deltaTime);
 
     }
 
+
+    // Methode zum Registrieren einer Kollision
     private void OnCollisionEnter(Collision collider)
     {
         Debug.Log("Player collision with " + collider.transform.name);
 
+        // Erkennen einer Kollision mit "Ziel"
         if (collider.transform.tag == "Goal")
         {
             Destroy(collider.gameObject);
+
+            // Bei Kollision mit Ziel wird neues Level aufgerufen
+            GameManager manager = FindObjectOfType<GameManager>();
+            manager.LoadNextLevel();
+
         }
+
+        
+
+
     }
 
 

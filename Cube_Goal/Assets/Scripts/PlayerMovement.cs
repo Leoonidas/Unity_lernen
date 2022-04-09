@@ -20,10 +20,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Imput.GetAxis wandelt WASD und Pfeiltsten Eingabe direkt in eine Änderung 1/Frame um
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Jump");
         float z = Input.GetAxis("Vertical");
 
+        // Neue Position aus Eingabe, angepasster Geschwindigkeit und DeltaTime zum FPS Ausgleich
         rb.MovePosition(rb.position + speed * (new Vector3(x, y, z)) * Time.deltaTime);
 
     }

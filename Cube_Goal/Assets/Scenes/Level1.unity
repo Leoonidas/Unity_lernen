@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c167d3e6e1ef04e8f8190150965493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevelIndex: 0
+  CurrentLevelIndex: 1
 --- !u!4 &427132769
 Transform:
   m_ObjectHideFlags: 0

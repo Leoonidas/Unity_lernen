@@ -8,13 +8,16 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public Rigidbody rb;
+    public AudioSource AudioSource;
     public float speed = 3.0f;
-
+    Vector3 StartPos;
+    public bool IsGrounded;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Hello World!" + transform.name);
+        // Speichern der Startposition
+        StartPos = transform.position;
     }
 
     // Update is called once per frame
@@ -28,6 +31,28 @@ public class PlayerMovement : MonoBehaviour
         // Neue Position aus Eingabe, angepasster Geschwindigkeit und DeltaTime zum FPS Ausgleich
         rb.MovePosition(rb.position + speed * (new Vector3(x, y, z)) * Time.deltaTime);
 
+
+
+
+        // Springen
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded == true)
+        {
+            rb.AddForce(Vector3.up * 3, ForceMode.Impulse);
+            IsGrounded = false;
+
+            // Sound
+            AudioSource.Play();
+        }
+
+
+
+
+
+        // Zurücksetzten beim Herunterfallen
+        if (transform.position.y < -10)
+        {
+            transform.position = StartPos;
+        }
     }
 
 
@@ -35,6 +60,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collider)
     {
         Debug.Log("Player collision with " + collider.transform.name);
+
+        // Sprung zurücksetzten
+        IsGrounded = true;
+
+
+
 
         // Erkennen einer Kollision mit "Ziel"
         if (collider.transform.tag == "Goal")
@@ -46,6 +77,10 @@ public class PlayerMovement : MonoBehaviour
             manager.LoadNextLevel();
 
         }
+
+
+
+        
 
         
 

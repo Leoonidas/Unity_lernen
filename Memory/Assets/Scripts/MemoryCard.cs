@@ -6,5 +6,13 @@ public class MemoryCard : MonoBehaviour
 {
     public int Identifier;
 
+    public void OnMouseDown()
+    {
+        // 
+        Debug.Log("Clicked");
+        FindObjectOfType<GameManager>().CardClicked(this);
+        
+
+    }
 
 }

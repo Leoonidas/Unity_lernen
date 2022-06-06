@@ -37,6 +37,27 @@ public class CharacterMovement : MonoBehaviour
         // falls der velocity Vektor größers als 0 ist, läuft der Charater
         bool isRunning = agent.velocity.magnitude > 0;
         anim.SetBool("isRunning", isRunning);
+    }
+
+
+
+    // Dialoge triggern
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "NPC")
+        {
+            FindObjectOfType<UIManager>().EnableTextWindow();
+        }
+
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "NPC")
+        {
+            FindObjectOfType<UIManager>().DisableTextWindow();
+        }
 
     }
 }
+
